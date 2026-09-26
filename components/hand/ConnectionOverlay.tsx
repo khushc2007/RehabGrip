@@ -1,0 +1,22 @@
+import {useEffect,useState} from 'react'
+import {useHand,sensorRef} from '@/store/handStore'
+import {wsStatus} from '@/hooks/useWebSocket'
+export default function ConnectionOverlay(){
+ const sim=useHand(s=>s.simMode),c=useHand(s=>s.connected),[hz,setHz]=useState(0),[stale,setStale]=useState(false),[status,setStatus]=useState(wsStatus.current)
+ useEffect(()=>{let raf=0,lt=-1,last=Date.now();const n:number[]=[]
+  const loop=()=>{const t=sensorRef.current.t;if(t!==lt){lt=t;last=Date.now();n.push(last)};raf=requestAnimationFrame(loop)} // freshness uses local arrival time, not device clock
+  raf=requestAnimationFrame(loop)
+  const id=setInterval(()=>{const now=Date.now();while(n.length&&now-n[0]>1000)n.shift();setHz(n.length);setStale(now-last>3000);setStatus(wsStatus.current)},500)
+  return()=>{cancelAnimationFrame(raf);clearInterval(id)}},[])
+ const live=!sim&&c&&status==='connected'
+ const [t,col]:[string,string]=sim?['SIM','#0F6E5E']
+  :status==='connecting'?['CONNECTING…','#f5a623']
+  :status==='reconnecting'?['RECONNECTING…','#f5a623']
+  :status==='offline'?['OFFLINE','#d9534f']
+  :!c?['IDLE','#444']
+  :stale?['STALE','#f5a623']
+  :['LIVE','#2ea853']
+ const hzCol=hz>10?'#2ea853':hz>0?'#f5a623':'#d9534f'
+ return <div className="absolute top-4 left-4 flex items-center gap-2 font-mono text-[9pt]" style={{color:col}}>
+  <span className={`w-1.5 h-1.5 rounded-full ${live&&!stale?'animate-pulse':''}`} style={{background:col}}/>{t}
+ {!sim&&c&&<span className="text-[8pt]" style={{color:hzCol}}>{hz}Hz</span>}</div>}
