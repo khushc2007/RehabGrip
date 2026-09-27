@@ -198,9 +198,9 @@ This is a hand-rehabilitation glove + dashboard project (RehabGrip) built around
 
 ## 👨‍💻 Team & Authors
 
-* **Suraj Rajesh** — *EEE, 2nd Year* — [@suraj-github](https://github.com/suraj-username)
-* **Khush Chadha** — *EEE, 2nd Year* — [@khush-github](https://github.com/khush-username)
-* **Rajat AN** — *EEE, 2nd Year* — [@rajat-github](https://github.com/rajat-username)
+* **Suraj Rajesh** — *EEE, 2nd Year*
+* **Khush Chadha** — *EEE, 2nd Year*
+* **Rajat AN** — *EEE, 2nd Year
 
 ---
 
