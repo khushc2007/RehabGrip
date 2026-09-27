@@ -1,3 +1,6 @@
+![Uploading image.png…]()
+
+
 # RehabGrip
 
 RehabGrip is a live hand-rehabilitation monitoring system: an ESP32-S3 glove streams finger-flexion, EMG, and IMU data over WebSocket to a Next.js clinician dashboard that renders a real-time 3D hand, detects reps, scores exercise quality, and generates patient reports.
