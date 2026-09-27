@@ -196,7 +196,7 @@ This is a hand-rehabilitation glove + dashboard project (RehabGrip) built around
 
 ---
 
-## 👨‍💻 Team & Authors
+## Team & Authors
 
 * **Suraj Rajesh** — *EEE, 2nd Year*
 * **Khush Chadha** — *EEE, 2nd Year*
