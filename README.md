@@ -193,3 +193,14 @@ This lets the entire dashboard — 3D hand, rep detection, EMG view, AI Lab, rep
 ## Project background
 
 This is a hand-rehabilitation glove + dashboard project (RehabGrip) built around an ESP32-S3-based device that tracks finger flexion, forearm EMG, and wrist IMU during rehab exercises, streamed live to a clinician-facing web dashboard for session monitoring, patient tracking, and automated reporting.
+
+---
+
+## 👨‍💻 Team & Authors
+
+* **Suraj Rajesh** — *EEE, 2nd Year* — [@suraj-github](https://github.com/suraj-username)
+* **Khush Chadha** — *EEE, 2nd Year* — [@khush-github](https://github.com/khush-username)
+* **Rajat AN** — *EEE, 2nd Year* — [@rajat-github](https://github.com/rajat-username)
+
+---
+
