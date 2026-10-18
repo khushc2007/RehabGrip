@@ -8,6 +8,35 @@
 
 ---
 
+## The prototype in pictures
+
+### The glove and wrist module
+
+<p align="center">
+  <img src="docs/images/real/01-wrist-module-and-glove-on-hand.jpg" width="340" alt="RehabGrip glove worn on a hand with the wrist module and forearm EMG leads">
+  &nbsp;&nbsp;
+  <img src="docs/images/real/03-glove-and-wrist-module-closeup.jpg" width="440" alt="Close-up of the RehabGrip glove and wrist module">
+</p>
+<p align="center"><em>Left: the wrist module and five-finger flex-sensor glove, with forearm EMG leads and the OLED status display. Right: close-up of the flex sensors along each finger and the wrist module.</em></p>
+
+### The team and the prototype
+
+<p align="center">
+  <img src="docs/images/real/02-team-with-prototype.jpg" width="340" alt="RehabGrip team members with the prototype worn on the forearm">
+  &nbsp;&nbsp;
+  <img src="docs/images/real/05-live-setup-with-dashboard.jpg" width="440" alt="Live demo setup with the wrist module beside a laptop running the RehabGrip dashboard">
+</p>
+<p align="center"><em>Left: the team with the prototype during NIRMAAN 2026. Right: the live setup, with the wrist module beside a laptop running the dashboard at localhost:3000/session.</em></p>
+
+### The clinician dashboard
+
+<p align="center">
+  <img src="docs/images/real/04-dashboard-sim-mode-hand-view.jpg" width="720" alt="RehabGrip clinician dashboard in SIM mode showing the 3D hand and finger angles">
+</p>
+<p align="center"><em>Clinician dashboard in SIM mode: the 3D hand reflects per-finger angles, and the panel shows rep counting and session controls.</em></p>
+
+---
+
 ## Contents
 
 1. [Team details](#1-team-details)
@@ -42,7 +71,7 @@
 
 ## 2. College / incubator information
 
-- **College:** MS Ramaiah Institute of Technology & Management (MSRIT), Mathikere, Bengaluru, Karnataka, India. Autonomous institution under VTU.
+- **College:** MS Ramaiah Institute of Technology (MSRIT), Bengaluru, Karnataka, India. Autonomous institution under VTU.
 - **Incubator:** Not applicable
 - **Event:** NIRMAAN 2026, "Build. Innovate. Impact.", hosted by Coding Club BMSIT × Alterino Club BMSIT and powered by Mastry Hub × Reskill.
 - **Track:** Healthtech & Bio-Wearables
