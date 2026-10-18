@@ -342,8 +342,7 @@ Click the **⌥** control at the bottom-left of the session view to open the sim
 
 ## 15. Known limitations
 
-- **No trained ML model yet.** Rep quality and movement assessment use fixed rules. The learned classifier is planned.
-- **Not clinically validated.** Thresholds, the AI Lab profiles and the sensing accuracy targets in the specification sheet are design targets, not results from a clinical study.
+
 - **Firmware is not in this repository.** The ESP32 code that reads the sensors and sends frames should be added to a `firmware/` folder.
 - **Prototype hardware.** The enclosure is 3D-printed PLA, and the glove is a development unit.
 - **No persistent database.** Session and patient data are sample data in this version.
