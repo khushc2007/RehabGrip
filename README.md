@@ -107,7 +107,6 @@ The glove firmware (ESP32 code) is **not included in this repository yet** (see 
 - **Wrist compensation.** Orientation is reconstructed from the IMU with a complementary filter in `hooks/useWebSocket.ts`, so wrist movement during an exercise can be flagged.
 - **AI Lab** (`components/lab/`) is a demonstration. It compares the measured movement against ten *simulated* reference profiles (healthy, stroke mild, stroke severe, parkinsonian, essential tremor, carpal tunnel, hand osteoarthritis, cerebral palsy, early motor neuron disease, diabetic neuropathy). The profiles are labelled as simulated and are not clinical thresholds.
 
-**Planned next (not yet implemented)**
 
 - A lightweight classifier (Random Forest, SVM or logistic regression, trained with scikit-learn) on labelled repetitions, to flag incorrect or compensatory reps beyond fixed thresholds.
 - On-device inference on the ESP32, so the glove works without a companion dashboard.
