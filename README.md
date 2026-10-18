@@ -4,8 +4,6 @@
 
 > **Status: prototype.** RehabGrip is a research and demonstration prototype. It has not been clinically validated and must not be used for diagnosis or treatment decisions.
 
-**Event:** NIRMAAN 2026 (Coding Club BMSIT × Alterino Club BMSIT), Healthtech & Bio-Wearables track.
-
 ---
 
 ## Contents
