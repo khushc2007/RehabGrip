@@ -214,10 +214,9 @@ Datasets: none. The project does not use external datasets. The AI Lab profiles 
 
 | Item | Link |
 |---|---|
-| Live clinician dashboard | [ADD VERCEL URL] |
-| Relay server health check | [ADD RENDER URL]/health |
-| Relay WebSocket for glove | wss://[ADD RENDER URL]/device |
-| Demo video (unlisted) | [ADD YOUTUBE LINK] |
+| Live clinician dashboard |https://rehab-t2.vercel.app/session|
+| Relay server health check | https://rehab-t3-render.onrender.com/health |
+| Relay WebSocket for glove | https://rehab-t3-render.onrender.com/device |
 | Source code | This repository |
 
 ---
