@@ -107,6 +107,9 @@ npm run dev
 
 Then go to `/session` and click **Connect to Device** (it does not auto-connect on load).
 
+[View the slides (PDF)](docs/presentation.pdf)
+[Download the PPTX](docs/presentation.pdf)
+
 ### 2. Relay server (`/server`)
 
 ```bash
