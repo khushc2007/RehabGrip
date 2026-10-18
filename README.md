@@ -39,9 +39,9 @@
 
 ## 2. College / incubator information
 
-- **College:** BMS Institute of Technology & Management (BMSIT&M), Yelahanka, Bengaluru 560119, Karnataka, India. Autonomous institution under VTU.
-- **Incubator:** [add incubator name, or write "Not applicable"]
-- **Event:** NIRMAAN 2026, "Build. Innovate. Impact.", hosted by Coding Club BMSIT × Alterino Club BMSIT and powered by Mastry Hub × Reskill.
+- **College:** MS Ramaiah Institute of Technology & Management (MSRIT), Mathikere, Bengaluru 560119, Karnataka, India. Autonomous institution under VTU.
+- **Incubator:** Not applicable
+
 - **Track:** Healthtech & Bio-Wearables
 
 ---
