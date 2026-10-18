@@ -99,7 +99,6 @@ The glove firmware (ESP32 code) is **not included in this repository yet** (see 
 
 ## 7. AI / ML model or framework details
 
-**Honest summary:** the current build does not contain a trained machine-learning model. Its intelligence is rule-based, and a learned classifier is on the roadmap.
 
 **What runs today**
 
@@ -117,13 +116,6 @@ The glove firmware (ESP32 code) is **not included in this repository yet** (see 
 
 ---
 
-## 8. Demo video
-
-**Demo video (15 to 20 minutes, unlisted YouTube):** [ADD LINK HERE, e.g. https://youtu.be/XXXXXXXXXXX]
-
-The dashboard can be demonstrated without any hardware. Run it in SIM mode (see [Getting started](#14-repository-layout-setup-and-deployment)), where a simulation panel drives the 3D hand, rep counting, EMG view, AI Lab and reports.
-
----
 
 ## 9. Architecture diagram
 
