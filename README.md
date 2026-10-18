@@ -1,8 +1,10 @@
 # RehabGrip
 
-**Small movements, big possibilities.** RehabGrip is a wearable hand-rehabilitation monitor. A glove with flex sensors, a surface EMG channel and a wrist IMU streams live data to a clinician dashboard that shows a real-time 3D hand, counts reps, grades movement quality and generates patient reports.
+**Small movements, big possibilities.** RehabGrip is a wearable hand-rehabilitation monitor, and its v3 concept extends the same sensing to early arthritis forecasting. A glove with flex sensors, a surface EMG channel and a wrist IMU streams live data to a clinician dashboard that shows a real-time 3D hand, counts reps, grades movement quality and generates patient reports.
 
 > **Status: prototype.** RehabGrip is a research and demonstration prototype. It has not been clinically validated and must not be used for diagnosis or treatment decisions.
+
+**Event:** NIRMAAN 2026 (Coding Club BMSIT × Alterino Club BMSIT), Healthtech & Bio-Wearables track.
 
 ---
 
@@ -13,16 +15,17 @@
 3. [Project title](#3-project-title)
 4. [Problem statement](#4-problem-statement)
 5. [Healthcare use case](#5-healthcare-use-case)
-6. [Technical stack](#6-technical-stack)
-7. [AI / ML model or framework details](#7-ai--ml-model-or-framework-details)
-8. [Demo video](#8-demo-video)
-9. [Architecture diagram](#9-architecture-diagram)
-10. [Presentation and hardware documents](#10-presentation-and-hardware-documents)
-11. [Open-source license details](#11-open-source-license-details)
-12. [Third-party and open-source declaration](#12-third-party-and-open-source-declaration)
-13. [Public links](#13-public-links)
-14. [Repository layout, setup and deployment](#14-repository-layout-setup-and-deployment)
-15. [Known limitations](#15-known-limitations)
+6. [Arthritis early forecasting (v3 concept)](#6-arthritis-early-forecasting-v3-concept)
+7. [Technical stack](#7-technical-stack)
+8. [AI / ML model or framework details](#8-ai--ml-model-or-framework-details)
+9. [Demo video](#9-demo-video)
+10. [Architecture diagram](#10-architecture-diagram)
+11. [Presentation and hardware documents](#11-presentation-and-hardware-documents)
+12. [Open-source license details](#12-open-source-license-details)
+13. [Third-party and open-source declaration](#13-third-party-and-open-source-declaration)
+14. [Public links](#14-public-links)
+15. [Repository layout, setup and deployment](#15-repository-layout-setup-and-deployment)
+16. [Known limitations](#16-known-limitations)
 
 ---
 
@@ -39,9 +42,9 @@
 
 ## 2. College / incubator information
 
-- **College:** MS Ramaiah Institute of Technology & Management (MSRIT), Mathikere, Bengaluru 560119, Karnataka, India. Autonomous institution under VTU.
+- **College:** MS Ramaiah Institute of Technology & Management (MSRIT), Mathikere, Bengaluru, Karnataka, India. Autonomous institution under VTU.
 - **Incubator:** Not applicable
-
+- **Event:** NIRMAAN 2026, "Build. Innovate. Impact.", hosted by Coding Club BMSIT × Alterino Club BMSIT and powered by Mastry Hub × Reskill.
 - **Track:** Healthtech & Bio-Wearables
 
 ---
@@ -70,7 +73,7 @@ After a clinic visit, patients are usually prescribed hand exercises to do at ho
 | Secondary | Physiotherapists and occupational therapists | Session data and trends to review and adjust the exercise program |
 | Institutional | Outpatient clinics, home-care and tele-rehab services, community health programs | Remote monitoring that extends supervised rehab beyond the clinic |
 
-**Clinical areas the sensing approach is designed for:** post-stroke upper-limb rehabilitation, hand osteoarthritis range-of-motion monitoring, carpal tunnel rehabilitation, Parkinson's motor assessment, and traumatic brain injury motor recovery.
+**Clinical areas the sensing approach is designed for:** post-stroke upper-limb rehabilitation, hand osteoarthritis range-of-motion monitoring, carpal tunnel rehabilitation, Parkinson's motor assessment, and traumatic brain injury motor recovery. Early arthritis forecasting (osteoarthritis and rheumatoid arthritis) is a planned extension; see [section 6](#6-arthritis-early-forecasting-v3-concept).
 
 **What the clinician sees:** per-finger range of motion, rep count and rep quality, EMG activation timing, wrist compensation (from the IMU), session history and trend charts, and an AI Lab that compares movement patterns against simulated reference profiles.
 
@@ -78,7 +81,40 @@ After a clinic visit, patients are usually prescribed hand exercises to do at ho
 
 ---
 
-## 6. Technical stack
+## 6. Arthritis early forecasting (v3 concept)
+
+> **Status: concept, not implemented.** The current code measures range of motion, EMG and wrist motion, but it has no arthritis model. The design below comes from the RehabGrip v3 concept document, [`docs/concept/RehabGrip_v3_Arthritis_Forecasting.pdf`](docs/concept/RehabGrip_v3_Arthritis_Forecasting.pdf) (September 25, 2026).
+
+**The problem.** Osteoarthritis, rheumatoid arthritis (RA) and post-traumatic arthritis progress slowly. Patients often notice stiffness or weakness months before diagnosis, and by the time blood tests and imaging confirm disease, joint damage may already be present. A clinic visit every few months can miss the early window when treatment has the most effect.
+
+**What the glove would measure.** The sensors used for rehabilitation would also track early markers over days and weeks:
+
+| Marker | Sensor | What a change may indicate |
+|---|---|---|
+| Declining range of motion | Flex sensors | Loss of finger flexion or extension over time |
+| Morning stiffness pattern | Flex sensors, with time of day | Strength that recovers slowly after rest |
+| Fine tremor change | IMU | Altered joint or muscle control |
+| Left–right asymmetry | Flex sensors on both hands | One-sided onset, which is common in early RA |
+| Fatigue slope | EMG | Faster strength loss across repeated grips |
+
+**Planned method (design intent, not code):**
+
+1. **Baseline (weeks 1–2):** record normal daily use to establish each person's reference values.
+2. **Daily joint health score:** combine more than 15 features, including range of motion, stiffness, tremor, asymmetry, EMG fatigue and recovery time after exertion.
+3. **Trend detection:** fit a linear regression to the score and flag a sustained decline. The concept proposes flagging a decline faster than 2% per week.
+4. **Forecast:** estimate how long a decline would take to reach a diagnostic threshold, so a clinician can review the patient earlier.
+
+The concept proposes an interpretable decision-tree model, so a clinician can see which changes triggered a flag, for example "range of motion down 8%, tremor up, asymmetry detected."
+
+**Intended users:** people with a family history of RA or osteoarthritis, or raised inflammatory markers without symptoms; people in the years after a hand injury; and people with RA on disease-modifying drugs who need flare monitoring.
+
+**Figures in the concept document.** The document reports a lab proof-of-concept (about 80% of predicted diagnosis dates within ±3–4 weeks on 50 RA patients), 85% specificity, cost-savings estimates and market sizes. These have not been reproduced in this repository. Treat them as targets or estimates until they are validated, and check the study citations before quoting them.
+
+**Path to validation.** A real study would compare RehabGrip-monitored patients with a standard-care group, using imaging-confirmed diagnosis dates over 18 to 24 months. Any clinical use would also need regulatory approval. The concept suggests CDSCO registration, so the device classification should be confirmed with a regulatory consultant.
+
+---
+
+## 7. Technical stack
 
 | Layer | Technology |
 |---|---|
@@ -93,12 +129,13 @@ After a clinic visit, patients are usually prescribed hand exercises to do at ho
 | Clinician dashboard | Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS, Zustand, Three.js via `@react-three/fiber` and `@react-three/drei`, Framer Motion; hosted on Vercel |
 | Data storage | No database in this version. The relay keeps state in memory, and the dashboard uses sample data from `lib/`. |
 
-The glove firmware (ESP32 code) is **not included in this repository yet** (see [Known limitations](#15-known-limitations)).
+The glove firmware (ESP32 code) is **not included in this repository yet** (see [Known limitations](#16-known-limitations)).
 
 ---
 
-## 7. AI / ML model or framework details
+## 8. AI / ML model or framework details
 
+**Honest summary:** the current build does not contain a trained machine-learning model. Its intelligence is rule-based, and a learned classifier is on the roadmap.
 
 **What runs today**
 
@@ -107,6 +144,7 @@ The glove firmware (ESP32 code) is **not included in this repository yet** (see 
 - **Wrist compensation.** Orientation is reconstructed from the IMU with a complementary filter in `hooks/useWebSocket.ts`, so wrist movement during an exercise can be flagged.
 - **AI Lab** (`components/lab/`) is a demonstration. It compares the measured movement against ten *simulated* reference profiles (healthy, stroke mild, stroke severe, parkinsonian, essential tremor, carpal tunnel, hand osteoarthritis, cerebral palsy, early motor neuron disease, diabetic neuropathy). The profiles are labelled as simulated and are not clinical thresholds.
 
+**Planned next (not yet implemented)**
 
 - A lightweight classifier (Random Forest, SVM or logistic regression, trained with scikit-learn) on labelled repetitions, to flag incorrect or compensatory reps beyond fixed thresholds.
 - On-device inference on the ESP32, so the glove works without a companion dashboard.
@@ -115,10 +153,22 @@ The glove firmware (ESP32 code) is **not included in this repository yet** (see 
 
 ---
 
+## 9. Demo video
 
-## 9. Architecture diagram
+**Demo video (15 to 20 minutes, unlisted YouTube):** [ADD LINK HERE, e.g. https://youtu.be/XXXXXXXXXXX]
 
-The diagram below shows the implemented system. It is also exported as [`docs/architecture/architecture.pdf`](docs/architecture/architecture.pdf) and [`docs/architecture/architecture.svg`](docs/architecture/architecture.svg), with the source in [`architecture.mmd`](docs/architecture/architecture.mmd).
+The dashboard can be demonstrated without any hardware. Run it in SIM mode (see [Getting started](#15-repository-layout-setup-and-deployment)), where a simulation panel drives the 3D hand, rep counting, EMG view, AI Lab and reports.
+
+---
+
+## 10. Architecture diagram
+
+![System architecture of RehabGrip](docs/images/architecture/architecture.png)
+
+*Glove → relay server → clinician dashboard. Source files: [PDF](docs/architecture/architecture.pdf), [SVG](docs/architecture/architecture.svg), [Mermaid source](docs/architecture/architecture.mmd).*
+
+<details>
+<summary>View the live Mermaid version (renders on GitHub)</summary>
 
 ```mermaid
 flowchart TB
@@ -158,37 +208,113 @@ flowchart TB
   HEALTH -. "pinged every 20 s<br/>keeps Render awake" .- WS
 ```
 
-The slide "System Architecture & Technical Implementation" in the project deck shows an earlier planned design, with direct BLE streaming to a companion app and an on-device classifier. The diagram above reflects what is in this repository: a WebSocket relay on Render and a Next.js dashboard on Vercel. The deck slide is kept in `docs/presentation/slides/` for reference.
+</details>
+
+The slide "System Architecture & Technical Implementation" in the project deck (slide 5 below) shows an earlier planned design, with direct BLE streaming to a companion app and an on-device classifier. The diagram above reflects what is in this repository: a WebSocket relay on Render and a Next.js dashboard on Vercel.
 
 ---
 
-## 10. Presentation and hardware documents
+## 11. Presentation and hardware documents
 
-Every file is included individually so it can be opened without downloading the whole set.
+Each image links to its full-resolution PDF. The complete deck is [`docs/presentation/RehabGrip_NIRMAAN2026_Presentation.pdf`](docs/presentation/RehabGrip_NIRMAAN2026_Presentation.pdf).
 
-| Document | File |
-|---|---|
-| Full presentation (8 slides) | [`docs/presentation/RehabGrip_NIRMAAN2026_Presentation.pdf`](docs/presentation/RehabGrip_NIRMAAN2026_Presentation.pdf) |
-| Slide 1: Cover | [`docs/presentation/slides/01-cover.pdf`](docs/presentation/slides/01-cover.pdf) |
-| Slide 2: Problem statement and real-world impact | [`docs/presentation/slides/02-problem-statement-and-impact.pdf`](docs/presentation/slides/02-problem-statement-and-impact.pdf) |
-| Slide 3: Proposed solution and innovation | [`docs/presentation/slides/03-proposed-solution-and-innovation.pdf`](docs/presentation/slides/03-proposed-solution-and-innovation.pdf) |
-| Slide 4: Product vision | [`docs/presentation/slides/04-product-vision.pdf`](docs/presentation/slides/04-product-vision.pdf) |
-| Slide 5: System architecture (planned design) | [`docs/presentation/slides/05-system-architecture-planned-design.pdf`](docs/presentation/slides/05-system-architecture-planned-design.pdf) |
-| Slide 6: Demo plan and roadmap | [`docs/presentation/slides/06-demo-plan-and-roadmap.pdf`](docs/presentation/slides/06-demo-plan-and-roadmap.pdf) |
-| Slide 7: 24-hour build scope and feasibility | [`docs/presentation/slides/07-24h-build-scope-and-feasibility.pdf`](docs/presentation/slides/07-24h-build-scope-and-feasibility.pdf) |
-| Slide 8: Team details | [`docs/presentation/slides/08-team-details.pdf`](docs/presentation/slides/08-team-details.pdf) |
-| Operator's manual and clinical guide | [`docs/hardware-and-product/01-operator-manual-and-clinical-guide.pdf`](docs/hardware-and-product/01-operator-manual-and-clinical-guide.pdf) |
-| Wrist module, exploded view and parts list | [`docs/hardware-and-product/02-wrist-module-exploded-view.pdf`](docs/hardware-and-product/02-wrist-module-exploded-view.pdf) |
-| Electrical schematic | [`docs/hardware-and-product/03-electrical-schematic.pdf`](docs/hardware-and-product/03-electrical-schematic.pdf) |
-| Mechanical dimensions | [`docs/hardware-and-product/04-mechanical-dimensions.pdf`](docs/hardware-and-product/04-mechanical-dimensions.pdf) |
-| Technical specification sheet | [`docs/hardware-and-product/05-technical-specification-sheet.pdf`](docs/hardware-and-product/05-technical-specification-sheet.pdf) |
-| Product poster: system overview | [`docs/hardware-and-product/06-product-poster-system-overview.pdf`](docs/hardware-and-product/06-product-poster-system-overview.pdf) |
-| Product poster: marketing | [`docs/hardware-and-product/07-product-poster-marketing.pdf`](docs/hardware-and-product/07-product-poster-marketing.pdf) |
-| Architecture diagram (PDF) | [`docs/architecture/architecture.pdf`](docs/architecture/architecture.pdf) |
+### Presentation
+
+#### Slide 1: Cover
+
+![Slide 1: Cover](docs/images/slides/01-cover.png)
+
+[Open PDF](docs/presentation/slides/01-cover.pdf)
+
+#### Slide 2: Problem statement and real-world impact
+
+![Slide 2: Problem statement and real-world impact](docs/images/slides/02-problem-statement-and-impact.png)
+
+[Open PDF](docs/presentation/slides/02-problem-statement-and-impact.pdf)
+
+#### Slide 3: Proposed solution and innovation
+
+![Slide 3: Proposed solution and innovation](docs/images/slides/03-proposed-solution-and-innovation.png)
+
+[Open PDF](docs/presentation/slides/03-proposed-solution-and-innovation.pdf)
+
+#### Slide 4: Product vision
+
+![Slide 4: Product vision](docs/images/slides/04-product-vision.png)
+
+[Open PDF](docs/presentation/slides/04-product-vision.pdf)
+
+#### Slide 5: System architecture (planned design)
+
+![Slide 5: System architecture (planned design)](docs/images/slides/05-system-architecture-planned-design.png)
+
+[Open PDF](docs/presentation/slides/05-system-architecture-planned-design.pdf)
+
+#### Slide 6: Demo plan and roadmap
+
+![Slide 6: Demo plan and roadmap](docs/images/slides/06-demo-plan-and-roadmap.png)
+
+[Open PDF](docs/presentation/slides/06-demo-plan-and-roadmap.pdf)
+
+#### Slide 7: 24-hour build scope and feasibility
+
+![Slide 7: 24-hour build scope and feasibility](docs/images/slides/07-24h-build-scope-and-feasibility.png)
+
+[Open PDF](docs/presentation/slides/07-24h-build-scope-and-feasibility.pdf)
+
+#### Slide 8: Team details
+
+![Slide 8: Team details](docs/images/slides/08-team-details.png)
+
+[Open PDF](docs/presentation/slides/08-team-details.pdf)
+
+### Hardware and product
+
+#### Operator's manual and clinical guide
+
+![Operator's manual and clinical guide](docs/images/hardware/01-operator-manual-and-clinical-guide.jpg)
+
+[Open PDF](docs/hardware-and-product/01-operator-manual-and-clinical-guide.pdf)
+
+#### Wrist module: exploded view and parts list
+
+![Wrist module: exploded view and parts list](docs/images/hardware/02-wrist-module-exploded-view.jpg)
+
+[Open PDF](docs/hardware-and-product/02-wrist-module-exploded-view.pdf)
+
+#### Electrical schematic
+
+![Electrical schematic](docs/images/hardware/03-electrical-schematic.jpg)
+
+[Open PDF](docs/hardware-and-product/03-electrical-schematic.pdf)
+
+#### Mechanical dimensions
+
+![Mechanical dimensions](docs/images/hardware/04-mechanical-dimensions.jpg)
+
+[Open PDF](docs/hardware-and-product/04-mechanical-dimensions.pdf)
+
+#### Technical specification sheet
+
+![Technical specification sheet](docs/images/hardware/05-technical-specification-sheet.jpg)
+
+[Open PDF](docs/hardware-and-product/05-technical-specification-sheet.pdf)
+
+#### Product poster: system overview
+
+![Product poster: system overview](docs/images/hardware/06-product-poster-system-overview.jpg)
+
+[Open PDF](docs/hardware-and-product/06-product-poster-system-overview.pdf)
+
+#### Product poster: marketing
+
+![Product poster: marketing](docs/images/hardware/07-product-poster-marketing.jpg)
+
+[Open PDF](docs/hardware-and-product/07-product-poster-marketing.pdf)
 
 ---
 
-## 11. Open-source license details
+## 12. Open-source license details
 
 - **Project code:** released under the **MIT License**. See [`LICENSE`](LICENSE).
 - **Main dependencies** (see `package.json` and `package-lock.json`): Next.js, React, React DOM, Three.js, `@react-three/fiber`, `@react-three/drei`, Zustand, Framer Motion and Tailwind CSS are MIT-licensed. TypeScript is Apache-2.0. The relay's `ws` library is MIT-licensed.
@@ -196,7 +322,7 @@ Every file is included individually so it can be opened without downloading the 
 
 ---
 
-## 12. Third-party and open-source declaration
+## 13. Third-party and open-source declaration
 
 | Component | Used for | Status |
 |---|---|---|
@@ -210,18 +336,26 @@ Datasets: none. The project does not use external datasets. The AI Lab profiles 
 
 ---
 
-## 13. Public links
+## 14. Public links
 
 | Item | Link |
 |---|---|
-| Live clinician dashboard |https://rehab-t2.vercel.app/session|
+| Live clinician dashboard | https://rehab-t2.vercel.app/session |
 | Relay server health check | https://rehab-t3-render.onrender.com/health |
-| Relay WebSocket for glove | https://rehab-t3-render.onrender.com/device |
+| Relay WebSocket for glove | wss://rehab-t3-render.onrender.com/device |
+| Demo video (unlisted) | [ADD YOUTUBE LINK] |
+| Source code | This repository |
+
+---|---|
+| Live clinician dashboard | [ADD VERCEL URL] |
+| Relay server health check | [ADD RENDER URL]/health |
+| Relay WebSocket for glove | wss://[ADD RENDER URL]/device |
+| Demo video (unlisted) | [ADD YOUTUBE LINK] |
 | Source code | This repository |
 
 ---
 
-## 14. Repository layout, setup and deployment
+## 15. Repository layout, setup and deployment
 
 ```
 .
@@ -338,13 +472,15 @@ Click the **⌥** control at the bottom-left of the session view to open the sim
 
 ---
 
-## 15. Known limitations
+## 16. Known limitations
 
-
+- **No trained ML model yet.** Rep quality and movement assessment use fixed rules. The learned classifier is planned.
+- **Not clinically validated.** Thresholds, the AI Lab profiles and the sensing accuracy targets in the specification sheet are design targets, not results from a clinical study.
 - **Firmware is not in this repository.** The ESP32 code that reads the sensors and sends frames should be added to a `firmware/` folder.
 - **Prototype hardware.** The enclosure is 3D-printed PLA, and the glove is a development unit.
 - **No persistent database.** Session and patient data are sample data in this version.
 - **Hosting limits.** The relay runs on Render's free tier, which can sleep. The heartbeat and `HealthKeepalive` reduce this but do not remove it.
+- **Arthritis forecasting is a concept only.** Section 6 describes planned work. No arthritis model, dataset or validation exists in this repository.
 - **Yaw drift.** Without a magnetometer, yaw drifts over time.
 
 ---
