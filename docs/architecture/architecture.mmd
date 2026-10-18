@@ -1,0 +1,35 @@
+flowchart TB
+  subgraph GLOVE["Wearable glove (ESP32-S3)"]
+    FLEX["5x flex sensors<br/>voltage dividers → ADC"]
+    EMG["Surface EMG front-end<br/>→ ADC"]
+    IMU["6-axis IMU<br/>I2C"]
+    LOCAL["On-glove feedback<br/>vibration motor, LED, OLED<br/>(firmware not in this repo)"]
+  end
+
+  subgraph RELAY["Relay server (Node.js + ws, Render)"]
+    DEV["/device<br/>accepts glove, validates frames"]
+    CACHE["last good frame cache"]
+    WS["/ws<br/>broadcasts to dashboards"]
+    HEALTH["/health<br/>uptime check"]
+  end
+
+  subgraph DASH["Clinician dashboard (Next.js 14, Vercel)"]
+    HOOK["useWebSocket<br/>reconnect backoff 1s→30s"]
+    STORE["Zustand store<br/>sensorRef hot path"]
+    REP["useRepDetection<br/>rep count, quality, EMG sync"]
+    VIEWS["3D hand (Three.js), EMG view,<br/>session, history, AI Lab,<br/>analytics, reports"]
+  end
+
+  FLEX --> ESP["ESP32-S3<br/>sampling, JSON frames"]
+  EMG --> ESP
+  IMU --> ESP
+  ESP -- "JSON frames over WebSocket" --> DEV
+  DEV --> CACHE
+  DEV --> WS
+  CACHE -. "replayed on connect" .-> WS
+  WS -- "sensor_data / device_status" --> HOOK
+  HOOK --> STORE --> REP
+  STORE --> VIEWS
+  REP --> VIEWS
+  ESP -. "feedback on deviation" .-> LOCAL
+  HEALTH -. "pinged every 20 s<br/>keeps Render awake" .- WS
