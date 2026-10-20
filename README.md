@@ -16,7 +16,6 @@ RehabGrip is a wearable hand-rehabilitation monitor. A glove with flex sensors, 
 > [!WARNING]
 > **Prototype only.** RehabGrip is a research and demonstration prototype. It has **not** been clinically validated and must **not** be used for diagnosis or treatment decisions.
 
-**Event:** NIRMAAN 2026 (Coding Club BMSIT × Alterino Club BMSIT), Healthtech & Bio-Wearables track.
 
 ---
 
@@ -114,7 +113,6 @@ RehabGrip is a wearable hand-rehabilitation monitor. A glove with flex sensors, 
 
 - **College:** MS Ramaiah Institute of Technology (MSRIT), Bengaluru, Karnataka, India. Autonomous institution under VTU.
 - **Incubator:** Not applicable.
-- **Event:** NIRMAAN 2026, "Build. Innovate. Impact.", hosted by Coding Club BMSIT × Alterino Club BMSIT and powered by Mastry Hub × Reskill.
 - **Track:** Healthtech & Bio-Wearables.
 
 ---
@@ -674,7 +672,6 @@ Please do not submit patient data or identifiable health information in issues o
 
 ## 28. Acknowledgements
 
-- **NIRMAAN 2026**, hosted by Coding Club BMSIT × Alterino Club BMSIT and powered by Mastry Hub × Reskill
 - **MS Ramaiah Institute of Technology**, Bengaluru
 - The open-source maintainers of Next.js, React, Three.js, Zustand, `ws` and the other packages listed in [section 23](#23-licenses-and-third-party-components)
 
